@@ -60,5 +60,10 @@
       <Name>SWSniff.SoulWorker</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="WSPE.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

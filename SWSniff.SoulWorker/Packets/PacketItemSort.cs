@@ -8,7 +8,7 @@ namespace SWSniff.SoulWorker.Packets
 
         protected override void Deserialize(byte[] data)
         {
-            Debug.Assert(ID == 0x0825);
+            // Debug.Assert(ID == 0x0825);
 
             if (data.Length == 1)
                 InvID = data[0];

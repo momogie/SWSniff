@@ -21,7 +21,7 @@ namespace SWSniff.SoulWorker.Packets
                 Debug.Assert(len == 0x20, "Unexpected checksum length");
                 Checksum = Encoding.ASCII.GetString(data, 14, len);
             }
-            else Debug.Fail("Unexpected packet length");
+            else Console.WriteLine("SystemKeepAlive: Unexpected packet length");
         }
 
         public override string ToString() => $"KeepAlive, TimeSinceSystemStart={new TimeSpan(0, 0, 0, 0, Ticks)}, always_zero={Unknown2}, bla={Unknown3}, checksum={Checksum}";

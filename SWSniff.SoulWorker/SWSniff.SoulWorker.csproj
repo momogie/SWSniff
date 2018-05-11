@@ -65,6 +65,7 @@
     <Compile Include="Packets\PacketTradeUpdateMoney.cs" />
     <Compile Include="SnifferEventArgs.cs" />
     <Compile Include="Packets\SWPacket.cs" />
+    <Compile Include="SwPcapSniffer.cs" />
     <Compile Include="SWSniffer.cs" />
   </ItemGroup>
   <ItemGroup>

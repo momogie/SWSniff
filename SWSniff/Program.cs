@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using SWSniff.Core;
 using SWSniff.SoulWorker;
 using SWSniff.SoulWorker.Packets;
 
@@ -10,12 +11,12 @@ namespace SWSniff
         private static string _dirLog;
         private static DateTime _startTime;
         private static int _lastSockId;
-        private static SWSniffer _s;
+        private static SwPcapSniffer _s;
 
         private static void Main(string[] args)
         {
             Console.WriteLine("Init...");
-            _s = new SWSniffer();
+            _s = new SwPcapSniffer();
             _dirLog = $"Capture_{_startTime = DateTime.Now:yyyyMMdd_hhmmss}";
             _s.PacketAction += OnPacketAction;
 
@@ -27,7 +28,7 @@ namespace SWSniff
 
             Console.WriteLine("Started, press enter to send a packet");
             Console.ReadLine();
-            _s.Inject(PacketType.ClientItemMoveMoney, new PacketItemMoveMoney(false, 123), _lastSockId);
+           // _s.Inject(PacketType.ClientItemMoveMoney, new PacketItemMoveMoney(false, 123), _lastSockId);
 
             Console.WriteLine("Press enter to exit");
             Console.ReadLine();

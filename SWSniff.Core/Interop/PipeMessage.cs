@@ -1,11 +1,13 @@
 ﻿using System.IO.Pipes;
+using SWSniff.Core.Interfaces;
 
 namespace SWSniff.Core.Interop
 {
-    public class PipeMessage
+    public class PipeMessage : INetworkMessage
     {
-        public PipeMessageHeader Header;
-        public readonly byte[] Data;
+        public PipeMessageHeader Header { get; }
+        public int SocketId => Header.SocketId;
+        public byte[] Data { get; private set; }
 
         public bool HasData => Header.DataSize != 0;
         

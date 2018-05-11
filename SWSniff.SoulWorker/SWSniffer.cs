@@ -45,7 +45,7 @@ namespace SWSniff.SoulWorker
         }
 
         /// <summary> Reads all packets from the message and invokes the event handlers. </summary>
-        protected override void HandlePacket(PipeMessage msg, bool outgoing)
+        protected override void HandlePacket(INetworkMessage msg, bool outgoing)
         {
             Debug.Assert(msg.HasData);
             var data = msg.Data;
@@ -61,7 +61,7 @@ namespace SWSniff.SoulWorker
                 byte[] slice = new byte[packetLen]; //TODO: C# 7 slicing
                 Array.Copy(data, packetStart, slice, 0, packetLen);
                 SWPacket p = SWPacket.Parse(slice);
-                PacketAction?.Invoke(this, new SnifferEventArgs(p, outgoing, msg.Header.SocketId));
+                PacketAction?.Invoke(this, new SnifferEventArgs(p, outgoing, msg.SocketId));
 
                 //update packet start
                 packetStart += packetLen;

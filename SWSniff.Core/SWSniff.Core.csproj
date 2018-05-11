@@ -32,8 +32,17 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PacketDotNet, Version=0.16.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\PacketDotNet.0.16.0\lib\PacketDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpPcap, Version=4.5.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\SharpPcap.4.5.0\lib\netstandard2.0\SharpPcap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Interfaces\INetworkMessage.cs" />
+    <Compile Include="Interop\PcapMessage.cs" />
+    <Compile Include="PcapSnifferBase.cs" />
     <Compile Include="Interop\PipeMessage.cs" />
     <Compile Include="Interop\PipeMessageHeader.cs" />
     <Compile Include="Interop\PipeEnums.cs" />
@@ -51,6 +63,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GeneralHelper.cs" />
     <Compile Include="SnifferBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

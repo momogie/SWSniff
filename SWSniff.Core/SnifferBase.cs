@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using SWSniff.Core.Interfaces;
 using SWSniff.Core.Interop;
 
 namespace SWSniff.Core
@@ -16,7 +17,7 @@ namespace SWSniff.Core
         private NamedPipeClientStream _pipeOut;
         private NamedPipeServerStream _pipeIn;
         private Thread _pipeThread;
-        private readonly string _procName;
+        protected readonly string _procName;
 
         protected SnifferBase(string procName)
         {
@@ -32,7 +33,7 @@ namespace SWSniff.Core
                 Thread.Sleep(sleepMs);
         }
 
-        public void Start()
+        public virtual void Start()
         {
             //find process
             int pid = GeneralHelper.GetProcessID(_procName) ?? throw new Exception("proc not found");
@@ -110,6 +111,9 @@ namespace SWSniff.Core
                             case PipeFunction.FuncWsaRecvDisconnect:
                                 HandlePacket(p, false);
                                 break;
+                            default:
+                                Console.WriteLine($"Ignored pipe message from WSA: {Enum.GetName(typeof(PipeFunction), p.Header.Function)}");
+                                break;
                         }
                         break;
 
@@ -125,6 +129,6 @@ namespace SWSniff.Core
         }
 
         /// <summary> Reads all packets from the message and invokes the event handlers. </summary>
-        protected abstract void HandlePacket(PipeMessage msg, bool outgoing);
+        protected abstract void HandlePacket(INetworkMessage msg, bool outgoing);
     }
 }
